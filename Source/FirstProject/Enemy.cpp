@@ -37,6 +37,8 @@ AEnemy::AEnemy()
 	Health = 75.f;
 	MaxHealth = 100.f;
 	Damage = 10.f;
+	AttackMinTime = 0.5f;
+	AttackMaxTime = 3.5f;
 
 	DeathDelay = 1.f;
 	EnemyMovementStatus = EEnemyMovementStatus::EMS_Idle;
@@ -74,8 +76,6 @@ void AEnemy::BeginPlay()
 
 	bOverlappingCombatSphere = false;
 
-	AttackMinTime = 0.5f;
-	AttackMaxTime = 3.5f;
 	bHasValidTarget = false;
 	Home = GetActorLocation();
 	HomeRotation = GetActorRotation();
@@ -229,6 +229,9 @@ void AEnemy::SwingOnOverlapEnd(UPrimitiveComponent* OverlappedComponent, AActor*
 void AEnemy::MoveToTarget(AMain* Target)
 {
 	SetEnemyMovementStatus(EEnemyMovementStatus::EMS_MoveToTarget);
+	SetActorRotation(
+		FRotator(0.f, GetActorRotation().Yaw, GetActorRotation().Roll)
+		);
 
 	if (AIController)
 	{

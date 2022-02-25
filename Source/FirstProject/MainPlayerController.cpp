@@ -41,9 +41,9 @@ void AMainPlayerController::Tick(float DeltaTime)
 		FVector2D PositionInViewport;
 		ProjectWorldLocationToScreen(EnemyLocation, PositionInViewport);
 		PositionInViewport.Y -= 85.f;
-		PositionInViewport.X -= 100.f;
+		PositionInViewport.X -= 50.f;
 
-		FVector2D SizeInViewport(300.f, 25.f);
+		FVector2D SizeInViewport(200.f, 15.f);
 
 		EnemyHealthBar->SetPositionInViewport(PositionInViewport);
 		EnemyHealthBar->SetDesiredSizeInViewport(SizeInViewport);
