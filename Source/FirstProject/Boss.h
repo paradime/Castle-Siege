@@ -25,6 +25,9 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CombatMechanics)
 	USoundCue* SlamSound;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = CombatMechanics)
+	TSubclassOf<class AExplosive> ExplosiveClass;
+
 protected:
 	virtual void BeginPlay() override;
 public:
@@ -43,4 +46,10 @@ public:
 
 	UFUNCTION(BlueprintCallable)
 	void TriggerJumpDamage();
+
+	UFUNCTION(BlueprintCallable)
+	void CreateBomb();
+
+	private:
+	void TriggerJumpSound();
 };

@@ -4,6 +4,7 @@
 #include "Boss.h"
 
 #include "AIController.h"
+#include "Explosive.h"
 #include "Main.h"
 #include "Components/SphereComponent.h"
 #include "GameFramework/CharacterMovementComponent.h"
@@ -104,4 +105,19 @@ void ABoss::TriggerJumpDamage()
 			UGameplayStatics::ApplyDamage(Main, JumpDamage, AIController, this, DamageTypeClass);
 		}
 	}
+	TriggerJumpSound();
+}
+
+void ABoss::CreateBomb()
+{
+	if (!ExplosiveClass) return;
+	FVector TargetLocation = CombatTarget->GetActorLocation();
+	TargetLocation.Z += 300;
+	GetWorld()->SpawnActor<AExplosive>(ExplosiveClass, TargetLocation, FRotator(0.f));
+}
+
+void ABoss::TriggerJumpSound()
+{
+	if (!SlamSound) return;
+	UGameplayStatics::PlaySound2D(this, SlamSound);
 }
